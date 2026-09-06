@@ -427,18 +427,6 @@ This sequence is highly suspicious.
 
 ---
 
-# MITRE ATT&CK Mapping
-
-| Technique | ID | Relevance |
-|---|---|---|
-| Brute Force | `T1110` | Multiple authentication failures occurred within a very short period |
-| Password Guessing | `T1110.001` | Activity is consistent with repeated credential-guessing attempts |
-| Remote Services: RDP | `T1021.001` | A successful Logon Type 10 RemoteInteractive session was observed |
-
-> MITRE ATT&CK mapping represents techniques consistent with the observed evidence and does not by itself prove attacker intent.
-
----
-
 # Attack Pattern
 
 The observed activity can be represented as:
@@ -481,115 +469,49 @@ Successful RDP authentication
 
 # Analyst Assessment
 
-## Verdict
+# MITRE ATT&CK Mapping
 
-**Highly Suspicious — Possible Brute Force / Credential Guessing Followed by Successful Remote Access**
+| Technique | ID | Relevance |
+|---|---|---|
+| Brute Force | `T1110` | Multiple authentication failures occurred within a very short period |
+| Password Guessing | `T1110.001` | Activity is consistent with repeated credential-guessing attempts |
+| Remote Services: RDP | `T1021.001` | A successful Logon Type 10 RemoteInteractive session was observed |
 
-The following factors contributed to the assessment:
+> MITRE ATT&CK mapping represents techniques consistent with the observed evidence and does not by itself prove attacker intent.
 
-- 14 failed authentication attempts occurred within approximately four seconds.
-- The attempts originated from a single source IP.
-- A successful RDP authentication occurred approximately 11 seconds later.
-- The successful authentication originated from the same source IP.
-- The successful account was `Administrator`.
-- The resulting session had an elevated token.
+---
 
-However, the failed authentication attempts targeted `support`, while the successful authentication used `Administrator`.
+# Verdict
 
-Therefore, the investigation cannot conclusively state that the `support` account was successfully brute-forced.
+**Suspicious Authentication Activity – Possible Brute-Force / Credential-Guessing Followed by Successful Remote Access**
 
-The correct conclusion is that **suspicious credential-guessing activity was followed shortly afterward by successful privileged RDP authentication from the same source IP**.
+Fourteen failed authentication attempts were observed from `10.10.53.248` within approximately four seconds against the `support` account.
+
+Approximately 11 seconds after the final failed attempt, the same source IP successfully authenticated to the `Administrator` account using Logon Type 10 (RemoteInteractive).
+
+The evidence does not prove that the `support` account itself was compromised because the successful authentication involved a different account. However, the timing, common source IP, privileged Administrator account, and RDP logon make the activity highly suspicious and warrant further investigation.
 
 ---
 
 # Recommended SOC Actions
 
-If this activity were observed in a production environment, the following actions should be considered:
-
-1. **Validate the source IP**
-   - Determine whether `10.10.53.248` is an authorized internal or remote-access system.
-
-2. **Investigate the Administrator account**
-   - Confirm whether the RDP login was expected and authorized.
-
-3. **Review additional authentication activity**
-   - Search for additional Event IDs `4624` and `4625` involving the same IP and accounts.
-
-4. **Investigate post-login activity**
-   - Review process creation, PowerShell activity, services, scheduled tasks, and other events following the successful login.
-
-5. **Reset potentially compromised credentials**
-   - Reset credentials if unauthorized access is confirmed or strongly suspected.
-
-6. **Restrict unnecessary RDP access**
-   - Limit RDP exposure to approved systems and trusted network ranges.
-
-7. **Apply account lockout controls**
-   - Configure appropriate lockout thresholds to reduce password-guessing risk.
-
-8. **Enable multi-factor authentication**
-   - Require MFA for privileged and remote-access accounts where supported.
-
-9. **Block or isolate suspicious sources**
-   - Block the source IP or isolate the affected host if malicious activity is confirmed.
-
-10. **Escalate for incident response**
-    - Escalate the investigation if evidence of unauthorized privileged access or post-compromise activity is identified.
-
----
-
-# Investigation Limitations
-
-This investigation is based on the available Windows Security Event Log evidence.
-
-The evidence confirms:
-
-- Repeated failed authentication attempts against `support`
-- A successful RDP authentication using `Administrator`
-- Both activities originated from `10.10.53.248`
-- The events occurred within a very short time window
-
-The available evidence does **not** independently confirm:
-
-- Who controlled the source IP
-- Whether the activity was authorized
-- Whether the `support` account was compromised
-- Whether malicious activity occurred after the Administrator login
-
-Additional endpoint, network, EDR, process, and authentication telemetry would be required for complete incident confirmation.
-
----
-
-# Skills Demonstrated
-
-This investigation demonstrates practical experience with:
-
-- Windows Security Event Log analysis
-- Event ID 4625 investigation
-- Event ID 4624 investigation
-- Authentication event correlation
-- Windows Logon Type analysis
-- RDP investigation
-- Source IP correlation
-- Account activity analysis
-- Timeline reconstruction
-- Indicator identification
-- MITRE ATT&CK mapping
-- SOC alert triage
-- Incident assessment
-- Remediation recommendations
+- Investigate the source IP `10.10.53.248`.
+- Verify whether the Administrator RDP login was authorized.
+- Review additional activity associated with the Administrator account.
+- Review Event IDs around the suspicious authentication timeframe.
+- Reset credentials if compromise is suspected.
+- Restrict unnecessary RDP access.
+- Apply account lockout and strong password policies.
+- Enable MFA for remote administrative access where available.
+- Monitor for additional authentication attempts from the same source.
 
 ---
 
 # Conclusion
 
-The investigation identified a burst of **14 failed authentication attempts** against the `support` account from `10.10.53.248`.
+The investigation identified a rapid sequence of failed network authentication attempts followed shortly afterward by a successful privileged RDP login from the same source IP.
 
-Approximately **11 seconds after the final observed failure**, the same source IP successfully authenticated to the Windows host through RDP using the `Administrator` account.
-
-The successful session used **Logon Type 10 (RemoteInteractive)** and had an **elevated token**.
-
-Although the evidence does not prove that the `support` account itself was successfully brute-forced, the close timing, matching source IP, and subsequent privileged RDP authentication make the activity highly suspicious and warrant further investigation.
+The activity is consistent with suspicious credential-guessing behavior and requires escalation for further investigation.
 
 ---
 
