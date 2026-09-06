@@ -439,13 +439,13 @@ This sequence is highly suspicious.
 
 # Attack Pattern
 
-The observed authentication sequence can be represented as:
+The observed activity can be represented as:
 
 ```text
 Source IP: 10.10.53.248
         |
         v
-Rapid authentication attempts
+Multiple authentication attempts
         |
         v
 14 × Event ID 4625
@@ -455,13 +455,12 @@ Target Account: support
         |
         v
 Logon Type 3
-(Network Authentication)
         |
         v
-Authentication Failures
+Authentication failures
         |
         v
-~11 seconds later
+Approximately 11 seconds later
         |
         v
 Event ID 4624
@@ -471,14 +470,9 @@ Account: Administrator
         |
         v
 Logon Type 10
-(RemoteInteractive)
         |
         v
-Successful RDP Authentication
-        |
-        v
-Elevated Token: Yes
-```
+Successful RDP authentication
 
 ---
 
@@ -597,3 +591,4 @@ Although the evidence does not prove that the `support` account itself was succe
 ---
 
 **Case Status:** Investigation Complete ✅
+---
