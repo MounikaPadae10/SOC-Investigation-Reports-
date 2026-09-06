@@ -142,7 +142,7 @@ The targeted account was:
 
 ### Finding
 
-The remote system repeatedly attempted authentication against the:
+The source system repeatedly attempted authentication against the:
 
 `support`
 
@@ -197,7 +197,7 @@ The source IP responsible for the failed authentication attempts was:
 
 `10.10.53.248`
 
-This IP became the primary investigation indicator for correlating additional authentication activity.
+This IP should be considered an important investigation indicator for correlation with related authentication activity.
 
 ---
 
