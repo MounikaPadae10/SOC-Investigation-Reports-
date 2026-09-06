@@ -439,6 +439,8 @@ This sequence is highly suspicious.
 
 # Attack Pattern
 
+The observed activity can be represented as:
+
 ```text
 Source IP: 10.10.53.248
         |
@@ -471,6 +473,7 @@ Logon Type 10
         |
         v
 Successful RDP authentication
+```
 
 ---
 
