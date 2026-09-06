@@ -51,25 +51,37 @@ IOC identification, MITRE ATT&CK mapping, and incident documentation.
 
 ## 📂 Investigation Methodology
 
-Each investigation generally follows the SOC workflow:
+Each investigation follows a structured SOC investigation process to ensure consistent analysis, evidence collection, and incident documentation.
 
-Alert
-↓
-Initial Triage
-↓
-Evidence Collection
-↓
-Log / Network Analysis
-↓
-IOC Identification
-↓
-Timeline Reconstruction
-↓
-MITRE ATT&CK Mapping
-↓
-Verdict
-↓
-Containment & Remediation Recommendations
+### Investigation Workflow
+
+**1. Alert Triage**  
+Review the security alert and identify the affected user, host, IP address, timestamp, and severity.
+
+**2. Evidence Collection**  
+Collect relevant logs, security events, network traffic, process information, and other available evidence.
+
+**3. Analysis & Correlation**  
+Analyze SIEM logs, Windows events, Sysmon telemetry, or network traffic and correlate related activity.
+
+**4. IOC Identification**  
+Identify relevant Indicators of Compromise (IOCs), such as IP addresses, domains, file hashes, URLs, filenames, and user accounts.
+
+**5. Timeline Reconstruction**  
+Reconstruct the sequence of events to understand how the activity started, progressed, and affected the environment.
+
+**6. MITRE ATT&CK Mapping**  
+Map confirmed attacker behavior to the appropriate MITRE ATT&CK tactics and techniques.
+
+**7. Incident Verdict**  
+Classify the activity based on the available evidence and determine whether the incident represents malicious, suspicious, or benign behavior.
+
+**8. Containment & Remediation**  
+Document recommended actions to contain the threat, remediate affected systems, and reduce the likelihood of recurrence.
+
+### SOC Investigation Flow
+
+`Alert → Triage → Evidence → Analysis → IOCs → Timeline → MITRE ATT&CK → Verdict → Containment & Remediation`
 
 ---
 
