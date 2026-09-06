@@ -349,15 +349,17 @@ Because the authenticated account was `Administrator`, the session would provide
 
 ---
 
-# Timeline
+## Investigation Timeline
 
-| Time | Event | Account | Source IP | Result |
-|---|---|---|---|---|
-| 10:53:26 PM | Event ID 4625 | `support` | `10.10.53.248` | Failed |
-| 10:53:27 PM | Event ID 4625 | `support` | `10.10.53.248` | Failed |
-| 10:53:28 PM | Event ID 4625 | `support` | `10.10.53.248` | Failed |
-| 10:53:30 PM | Event ID 4625 | `support` | `10.10.53.248` | Failed |
-| 10:53:41 PM | Event ID 4624 | `Administrator` | `10.10.53.248` | Successful RDP Login |
+The table below summarizes the key timestamps observed during the authentication activity; multiple Event ID 4625 records occurred at some of these timestamps.
+
+| Time | Event ID | Activity |
+|------|----------|----------|
+| 10:53:26 PM | 4625 | Multiple failed logon attempts observed |
+| 10:53:27 PM | 4625 | Continued failed authentication attempts |
+| 10:53:28 PM | 4625 | Failed logon attempts against the support account |
+| 10:53:30 PM | 4625 | Final observed failed logon attempts |
+| 10:53:41 PM | 4624 | Successful Logon Type 10 for Administrator |
 
 ### Timeline Analysis
 
