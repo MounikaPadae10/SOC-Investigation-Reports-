@@ -14,7 +14,7 @@ IOC identification, MITRE ATT&CK mapping, and incident documentation.
 
 | Case | Investigation | Status |
 |------|---------------|--------|
-| 01 | [Brute Force Investigation](./Case-01-BruteForce/) | 🔄 In Progress |
+| 01 | [Brute Force Investigation](./Case-01-BruteForce/) | ✅ Completed |
 | 02 | [Ransomware Investigation](./Case-02-Ransomware/) | ⏳ Planned |
 | 03 | [Phishing Investigation](./Case-03-Phishing/) | ⏳ Planned |
 | 04 | [Malware Investigation](./Case-04-Malware/) | ⏳ Planned |
