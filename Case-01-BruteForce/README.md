@@ -439,8 +439,6 @@ This sequence is highly suspicious.
 
 # Attack Pattern
 
-The observed activity can be represented as:
-
 ```text
 Source IP: 10.10.53.248
         |
@@ -591,4 +589,3 @@ Although the evidence does not prove that the `support` account itself was succe
 ---
 
 **Case Status:** Investigation Complete ✅
----
