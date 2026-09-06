@@ -160,7 +160,7 @@ The failed authentication event contained the following information:
 | Status | `0xC000006D` |
 | Sub Status | `0xC0000064` |
 
-These values indicate that Windows could not successfully authenticate the supplied credentials.
+The status indicates a general logon failure, while Sub Status `0xC0000064` is consistent with an invalid, misspelled, or non-existent user account.
 
 The rapid repetition of these failures further increases the likelihood of automated credential guessing.
 
