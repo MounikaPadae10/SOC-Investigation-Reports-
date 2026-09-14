@@ -1,5 +1,15 @@
 # Case 02 — Conti Ransomware Investigation
 
+| Case Detail | Information |
+|---|---|
+| Case ID | `CASE-02` |
+| Incident Type | Ransomware |
+| Severity | Critical |
+| Status | Completed |
+| Verdict | True Positive |
+| Environment | Authorized TryHackMe lab |
+| Analyst | Mounika Padae |
+
 ## Executive Summary
 
 This investigation examined a ransomware incident affecting the Microsoft Exchange server `WIN-AOQKG2AS2Q7`. Analysis of Splunk, IIS, Windows Security, and Sysmon telemetry identified evidence consistent with exploitation of an Exchange/OWA endpoint, web-shell activity, PowerShell execution, persistence through a backdoor account, ransomware execution, SMB connections, and ransom-note deployment.
