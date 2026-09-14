@@ -109,7 +109,7 @@ This provides additional endpoint evidence connecting command execution to the E
 Commands were executed to create the local account `securityninja` and attempt to add it to privileged groups:
 
 ```text
-net user /add securityninja hardToHack123$
+net user securityninja <REDACTED> /add
 net localgroup administrators securityninja /add
 net localgroup "Remote Desktop Users" securityninja /add
 ```
@@ -238,8 +238,8 @@ Sysmon file-creation events recorded 18 ransom-note events across 18 unique loca
 | Defense Evasion | Masquerading: Match Legitimate Name or Location | `T1036.005` | Ransomware named `cmd.exe` outside `System32` |
 | Persistence | Create Account: Local Account | `T1136.001` | Local account `securityninja` created and enabled |
 | Persistence / Privilege Escalation | Account Manipulation: Additional Local or Cloud Roles | `T1098.007` | Commands attempted to add the account to privileged local groups |
-| Command and Control | Application Layer Protocol: Web Protocols | `T1071.001` | PowerShell communicated with `10.10.10.2` over TCP 443 |
-| Lateral Movement | Remote Services: SMB/Windows Admin Shares | `T1021.002` | Ransomware process initiated SMB connections over port 445 |
+| Command and Control | Non-Application Layer Protocol | `T1095` | PowerShell established a direct TCP connection to `10.10.10.2` over port 443 |
+| Lateral Movement | Remote Services: SMB/Windows Admin Shares | `T1021.002` | Potential technique: the ransomware process initiated SMB connections over port 445, but successful remote execution was not confirmed |
 | Impact | Data Encrypted for Impact | `T1486` | Conti ransom note and widespread ransom-note deployment |
 
 ## Verdict
